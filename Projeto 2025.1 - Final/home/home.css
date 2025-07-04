@@ -1,0 +1,270 @@
+
+      /* Estilos personalizados */
+      html, body {
+          font-family: 'Poppins', sans-serif; /* Mantido Poppins como estava no original. Considerar padronizar para Inter/Roboto como sugerido no documento de melhorias. */
+          transition: background-color 0.3s ease-in-out;
+          box-sizing: border-box;
+          overflow-y: auto;
+      }
+
+      /* Fundos para tema claro e escuro */
+      [data-theme="light"] body {
+          background: rgba(255,255,255,255);
+          background-size: cover;
+      }
+
+      [data-theme="dark"] body {
+          background:rgba(19,18,19,255);
+          background-size: cover;
+      }
+
+      /* Estilos para o alternador de tema */
+      .theme-btn .moon,
+      .theme-btn .sun {
+          position: absolute;
+          font-size: 1.5rem;
+          transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+      }
+
+      [data-theme="light"] .moon {
+          opacity: 1;
+          transform: scale(1);
+      }
+
+      [data-theme="light"] .sun {
+          opacity: 0;
+          transform: scale(0);
+      }
+
+      [data-theme="dark"] .moon {
+          opacity: 0;
+          transform: scale(0);
+      }
+
+      [data-theme="dark"] .sun {
+          opacity: 1;
+          transform: scale(1);
+      }
+
+      /* Estilos do modal */
+      .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          opacity: 0; /* Começa oculto */
+          visibility: hidden; /* Começa invisível */
+          transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      }
+
+      .modal-overlay.visible { /* Classe para mostrar o modal */
+          opacity: 1;
+          visibility: visible;
+      }
+
+      .modal-content {
+          background-color: white; /* Light mode default */
+          padding: 2rem;
+          border-radius: 0.75rem;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          max-width: 400px;
+          width: 90%;
+          transform: translateY(-20px); /* Começa um pouco acima */
+          transition: transform 0.3s ease-in-out;
+      }
+
+      .modal-overlay.visible .modal-content { /* Animação ao aparecer */
+          transform: translateY(0);
+      }
+
+      /* CORRIGIDO: Removidas aspas dos valores hexadecimais */
+      [data-theme="dark"] .modal-content {
+          background-color: #1e1e1e;
+          color: #f8f9fa;
+      }
+
+      [data-theme="light"] #modalMessage, [data-theme="light"] #editProfileModalMessage {
+          color: #000000 !important; /* Preto */
+      }
+      [data-theme="dark"] #modalMessage, [data-theme="dark"] #editProfileModalMessage {
+          color: #ffffff !important; /* Branco */
+      }
+
+      /* Animação CSS para fade-in */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out forwards; /* Adicionado forwards para manter o estado final */
+      }
+
+      /* Animação para itens de carrossel deslizarem */
+      @keyframes slideInFromRight {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .carrossel-item-animated.ativo {
+        animation: slideInFromRight 0.5s ease-out forwards;
+      }
+
+      /* Estilo para a animação do menu mobile */
+      #menu-mobile[aria-expanded="true"] .menu-icon:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      #menu-mobile[aria-expanded="true"] .menu-icon:nth-child(2) {
+        opacity: 0;
+      }
+      #menu-mobile[aria-expanded="true"] .menu-icon:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+      /* Estilo para o menu dropdown mobile */
+      #menu.ativo {
+        display: flex !important; /* Força display flex quando ativo */
+        left: 0;
+      }
+      /* Estilo para o accordion de dicas */
+      .dica.ativo .dica-conteudo {
+        max-height: 500px; /* Suficiente para expandir o conteúdo */
+      }
+      .dica.ativo .dica-titulo i {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease-in-out; /* Adiciona transição para a rotação */
+      }
+      /* Estilo para indicadores de carrossel ativos */
+      .carrossel-indicador.ativo {
+        background-color: #4b6cb7; /* Cor primária */
+      }
+      .dark .carrossel-indicador.ativo {
+        background-color: #ffd700; /* Cor de destaque para alto contraste */
+      }
+      /* Hover state para indicadores */
+      .carrossel-indicador:hover {
+        opacity: 0.7;
+      }
+
+      /* Estilo para o pseudo-elemento da citação do depoimento */
+      .depoimento-conteudo::before {
+        content: '"';
+        font-family: Georgia, serif;
+        font-size: 5rem;
+        color: rgba(75, 108, 183, 0.1); /* Cor primária com opacidade */
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        line-height: 1;
+      }
+      /* Ajuste para alto contraste no pseudo-elemento */
+      .dark .depoimento-conteudo::before {
+        color: rgba(255, 215, 0, 0.1); /* Cor de destaque com opacidade */
+      }
+
+      /* Ajuste para o scroll-behavior smooth */
+      html {
+          scroll-behavior: smooth;
+      }
+
+      /* Sombra de texto para o hero */
+      .hero-texto h2, .hero-texto p {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Estilo para o botão "Saiba mais" do curso quando ativo */
+      .dica.ativo .dica-titulo {
+        background-color: #182848; /* Cor secundária, mais escura ao abrir */
+      }
+
+      .dark .dica.ativo .dica-titulo {
+        background-color: #ffd700; /* Cor de destaque para alto contraste */
+        color: #121212; /* Texto escuro para contrastar */
+      }
+
+      /* Ajustes para o iframe de preview */
+      .preview-container iframe {
+        /* Garante que o iframe preenche o container */
+        width: 100% !important;
+        height: 100% !important;
+        transform: scale(1) !important; /* Remove o scaling original */
+        transform-origin: center center !important; /* Centraliza a origem da transformação */
+        pointer-events: auto !important; /* Permite interação com o iframe */
+        filter: grayscale(0%) opacity(100%) !important; /* Remove os filtros padrão */
+        transition: none !important; /* Remove transições CSS padrão */
+      }
+      .preview-overlay {
+        display: none !important; /* Oculta o overlay pois o iframe será interativo */
+      }
+
+      /* Estilos para o modal de edição de perfil */
+      #editProfileModal .modal-content {
+        max-width: 500px;
+        text-align: left; /* Alinha o texto das labels à esquerda */
+      }
+
+      #editProfileModal .modal-content .input-group {
+        margin-bottom: 1rem; /* Espaçamento entre os grupos de input */
+      }
+
+      #editProfileModal .modal-content label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      /* Regras para labels e inputs dentro do modal de edição no modo escuro */
+      [data-theme="dark"] #editProfileModal .modal-content label {
+          color: #ffffff; /* Labels brancos no modo escuro */
+      }
+      [data-theme="dark"] #editProfileModal .modal-content input[type="text"],
+      [data-theme="dark"] #editProfileModal .modal-content input[type="date"],
+      [data-theme="dark"] #editProfileModal .modal-content input[type="tel"] {
+          background-color: #000000; /* Fundo preto para inputs no modo escuro */
+          color: #ffffff; /* Texto branco para inputs no modo escuro */
+          border-color: #3a3a3a; /* Borda mais escura para inputs no modo escuro */
+      }
+      /* Estilo para o foco nos inputs do modal de edição no modo escuro */
+      [data-theme="dark"] #editProfileModal .modal-content input[type="text"]:focus,
+      [data-theme="dark"] #editProfileModal .modal-content input[type="date"]:focus,
+      [data-theme="dark"] #editProfileModal .modal-content input[type="tel"]:focus {
+          border-color: #ffd700; /* Cor de destaque no foco */
+          box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2); /* Sombra no foco */
+      }
+      /* Cor dos ícones dentro dos inputs do modal de edição no modo escuro */
+      [data-theme="dark"] #editProfileModal .modal-content .input-icon {
+          color: #a0a0a0; /* Cor mais clara para ícones no modo escuro */
+      }
+
+
+      /* REMOVED .input-group .input-icon absolute positioning */
+      /* REMOVED .input-group input.has-icon padding-left */
+
+      /* Estilo para mensagens de erro com ícone */
+      .erro-msg-container {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+            color: #dc2626; /* Cor do texto de erro */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500; /* font-medium */
+        }
+        .erro-msg-container i {
+            margin-right: 4px; /* Espaço entre o ícone e o texto */
+        }
+    
